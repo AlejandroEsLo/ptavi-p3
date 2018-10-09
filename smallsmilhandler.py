@@ -20,16 +20,19 @@ class SmallSMILHandler(ContentHandler):
     
     def startElement(self, etiqueta, attrs):
 
-        #Creamos un diccionario con la etiqueta y su atributo correspondiente
+        #Creamos un diccionario con la etiqueta y sus atributos
         self.dicc = {"root-layout": self.rootlayout, "region": self.region,
                      "img": self.img, "audio": self.audio,
                      "textstream": self.textstream}
 
-#        dicc_aux ={}  >> ir almacenando
-
+        dicc_aux ={}
+        
         if etiqueta in self.dicc:
-
-            self.data.append(etiqueta)# Añadir al final de la lista
+            #Iteramos por todos los atributos de cada etiqueta
+            for attrb in self.dicc[etiqueta]:
+                dicc_aux[attrb] = attrs.get(attrb, "")  
+        
+            self.data.append([etiqueta,dicc_aux]) # Añadir al final de la lista
       
     def get_tags(self):
        
@@ -42,5 +45,4 @@ if __name__ == "__main__":
     parser.setContentHandler(cHandler)#Le paso el parser al manejador
     parser.parse(open('karaoke.smil'))
     print(cHandler.get_tags())
-    
     
