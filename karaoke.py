@@ -5,6 +5,7 @@ from xml.sax import make_parser
 from xml.sax.handler import ContentHandler
 
 import sys
+import json
 
 from smallsmilhandler import SmallSMILHandler
 
@@ -30,9 +31,12 @@ try:
                 elementoX += "\\t" + str(valorXY) + "=\"" + str(atributoXY[valorXY]) + "\""             
                 
         linea_final = elementoX + "\\n"
-    
+        
+        dictionaryToJson = json.dumps(linea_final) #Diccionario en json
+        
         print(linea_final)
-    
+        #print(dictionaryToJson) #imprimir formato json
+
 except IndexError:
     sys.exit("Usage:python3 karaoke.py file.smil.")
     
