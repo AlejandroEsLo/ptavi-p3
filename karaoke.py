@@ -5,7 +5,7 @@ from xml.sax.handler import ContentHandler
 from xml.sax import make_parser
 import sys
 import json
-from urllib.request import urlretrieve
+#from urllib.request import urlretrieve
 from smallsmilhandler import SmallSMILHandler
 
 class KaraokeLocal():
@@ -33,15 +33,22 @@ class KaraokeLocal():
                 
             archv_smil = archv_smil + linea_final + "\n"
         
-        print(archv_smil)
-              
+        print(archv_smil)#Imprimimos archivo smil
+               
+    def to_json(self,fich_json):
+       #Fichero final Json            
+        json.dump(self.my_archv, open(fich_json, "w"))
+        
+   
 if __name__ == "__main__":   
 #Programa principal
     try:
-        fich_smil = sys.argv[1]
-        fich_karaoke = KaraokeLocal(fich_smil)     
+        fich_smil = sys.argv[1]#Fichero principal
+        fich_json = sys.argv[1].replace(".smil",".json")#Fichero Json
+        fich_karaoke = KaraokeLocal(fich_smil)
         fich_karaoke.__str__()
-      
+        fich_karaoke.to_json(fich_json)#Pasamos fichero smil a fichero Json
+
         print("SALIDA(PRUEBA)")
         
         
