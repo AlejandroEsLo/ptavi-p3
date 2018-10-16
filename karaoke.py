@@ -28,14 +28,15 @@ class KaraokeLocal():
             # Iteramos por el archivo
             for valorXY in atributoXY:
                 if atributoXY[valorXY] != "":
-                    elementoX += "\\t" + str(valorXY) + "=\"" + str(atributoXY[valorXY]) + "\""
-
+                    elementoX += "\\t" + str(valorXY) + "=\"" \
+                        + str(atributoXY[valorXY]) + "\""
+            # Ponemos \ para cambiar de linea y pasar Pep8
                 linea_final = elementoX + "\\n"
 
             archv_smil = archv_smil + linea_final + "\n"
 
-        print(archv_smil, end="")  # Imprimimos archivo smil
-        # Utilizamos el "end" para quitar el ultimo salto de linea
+        print(archv_smil[:-1])  # Imprimimos archivo smil
+        # Cogemos todos los elementos menos el ultimo salto de linea
 
     def to_json(self, fich_json):
         # Fichero final Json
@@ -61,10 +62,13 @@ if __name__ == "__main__":
     try:
         fich_smil = sys.argv[1]  # Fichero principal
         fich_json = sys.argv[1].replace(".smil", ".json")  # Fichero Json
+        fich_json2 = "local.json"
         fich_karaoke = KaraokeLocal(fich_smil)
         fich_karaoke.__str__()
         fich_karaoke.to_json(fich_json)  # Pasamos fichero smil a fichero Json
         fich_karaoke.do_local()  # Descargamos archivos
+        fich_karaoke.to_json(fich_json2)
+        fich_karaoke.__str__()
 
     except IndexError:
         sys.exit("Usage:python3 karaoke.py file.smil.")

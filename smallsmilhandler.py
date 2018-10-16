@@ -21,7 +21,7 @@ class SmallSMILHandler(ContentHandler):
 
     def startElement(self, etiqueta, attrs):
 
-        # Creamos un diccionario con la etiqueta y sus atributos
+        # Creamos un diccionario con la etiqueta y sus atributos.
         self.dicc = {"root-layout": self.rootlayout, "region": self.region,
                      "img": self.img, "audio": self.audio,
                      "textstream": self.textstream}
